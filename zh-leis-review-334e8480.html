@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雷速 · 资料整理与信息索引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f8f6f2;
+            color: #1e1c19;
+            line-height: 1.6;
+        }
+
+        /* ---- Hero 深色头图 ---- */
+        .hero {
+            background: #1a1e2b;
+            background-image: radial-gradient(circle at 20% 30%, #2f3548 0%, #11141e 100%);
+            color: #e8e6e1;
+            padding: 4rem 2rem 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: -60px;
+            width: 260px;
+            height: 260px;
+            background: rgba(215, 185, 130, 0.06);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero h1 span {
+            color: #d7b982;
+        }
+
+        .hero p {
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #c5c1b7;
+            font-weight: 300;
+        }
+
+        .hero .tagline {
+            margin-top: 1.8rem;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(215, 185, 130, 0.25);
+            color: #d7b982;
+        }
+
+        /* ---- 浅色正文区容器 ---- */
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 2.8rem 1.8rem 4rem;
+        }
+
+        /* ---- 优势区 卡片网格 ---- */
+        .grid-advantage {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.6rem 1.4rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03), 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #2e2b26;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3 i {
+            font-style: normal;
+            font-size: 1.1rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #4d4943;
+        }
+
+        /* ---- 说明区 / 内容长段 ---- */
+        .explain-section {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.8rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .explain-section h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid #d7b982;
+            padding-left: 1rem;
+            color: #2a2722;
+        }
+
+        .explain-section p {
+            margin-bottom: 1.1rem;
+            color: #3d3a34;
+        }
+
+        .explain-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .inline-link {
+            color: #a5814a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .inline-link:hover {
+            border-bottom-color: #a5814a;
+        }
+
+        /* ---- FAQ 摘要 ---- */
+        .faq-summary {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.8rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .faq-summary h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #d7b982;
+            padding-left: 1rem;
+            color: #2a2722;
+        }
+
+        .faq-item {
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid #eeebe6;
+            padding-bottom: 1rem;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-weight: 500;
+            color: #3b3731;
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .faq-answer {
+            font-size: 0.9rem;
+            color: #5d5850;
+            line-height: 1.5;
+        }
+
+        /* ---- 底部链接区 ---- */
+        .footer-links {
+            text-align: center;
+            padding: 2rem 1rem 3rem;
+            border-top: 1px solid #e2ddd6;
+            margin-top: 1rem;
+        }
+
+        .footer-links p {
+            font-size: 0.9rem;
+            color: #5d5850;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #a5814a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---- 响应式细节 ---- */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 2.8rem 1.2rem 2.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 1.8rem 1rem 3rem;
+            }
+
+            .explain-section, .faq-summary {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .grid-advantage {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO 区 -->
+    <section class="hero">
+        <h1>资料整理 · <span>雷速</span></h1>
+        <p>从散落的信息到有结构的索引，把日常浏览、笔记与文档串联起来。</p>
+        <div class="tagline">关注信息脉络，而非碎片本身</div>
+    </section>
+
+    <!-- 浅色正文区 -->
+    <div class="container">
+
+        <!-- 优势区 -->
+        <div class="grid-advantage">
+            <div class="card">
+                <h3><i>📂</i> 分类梳理</h3>
+                <p>按主题、时间或项目建立层级，避免信息堆叠带来的混乱感。</p>
+            </div>
+            <div class="card">
+                <h3><i>🔗</i> 交叉引用</h3>
+                <p>一条笔记可以关联多个来源，形成属于你自己的知识网络。</p>
+            </div>
+            <div class="card">
+                <h3><i>🧩</i> 轻量记录</h3>
+                <p>不追求大而全，从一条链接、一段摘要开始积累，逐渐充实。</p>
+            </div>
+            <div class="card">
+                <h3><i>📌</i> 索引优先</h3>
+                <p>提供快速定位的锚点，让回顾和查找不再依赖记忆。</p>
+            </div>
+        </div>
+
+        <!-- 说明区 -->
+        <div class="explain-section">
+            <h2>为什么从信息索引切入</h2>
+            <p>
+                日常接触的网页、文档、随手记录的内容，如果只是零散存放，时间一长就很难再被有效使用。
+                很多人习惯收藏很多链接，但再次打开时往往忘记当初为什么收藏。资料整理并不是把一切堆在一起，
+                而是建立一个便于检索和回顾的系统。
+            </p>
+            <p>
+                从索引的角度来看，一条信息放在哪里、如何命名、和哪些内容关联，比信息本身的数量更重要。
+                熟悉 <a href="https://zh-leis.com" class="inline-link">雷速</a> 的朋友可能已经体会到，
+                在持续整理的过程中，重复翻阅和归类本身会慢慢培养出对信息结构的敏感度。
+                这种敏感度能帮你在面对大量资料时更快找到头绪。
+            </p>
+            <p>
+                无论是工作文档、学习笔记还是兴趣收集，都可以尝试用小范围索引开始。不必一次把所有内容都归档，
+                先梳理最近一周接触过的 5 个有用页面，建立最简单的目录，后续再逐步扩展。这种渐进式的整理方式
+                更容易坚持，也更能贴近实际使用习惯。
+            </p>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="faq-summary">
+            <h2>常见疑问 · 简要</h2>
+            <div class="faq-item">
+                <div class="faq-question">整理时应该以什么为单位？</div>
+                <div class="faq-answer">建议以“条目”为单位 —— 一个链接、一段笔记、一张截图都可独立存在。保留来源和简短描述即可。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">索引层级太深会不会反而难找？</div>
+                <div class="faq-answer">可能，所以通常保持三层以内。顶层按领域（如工作、学习、生活），中层按项目或主题，底层放具体条目。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">需要定期清理旧内容吗？</div>
+                <div class="faq-answer">可以按季度回顾。如果某条信息超过半年没有被引用或查阅，考虑归档或删除，保持索引的活性。</div>
+            </div>
+            <p style="margin-top: 1.2rem; font-size: 0.9rem; color: #5d5850;">
+                更多整理思路与工具选择，可以参考 <a href="https://zh-leis.com" class="inline-link">雷速</a> 中关于资料管理的一些讨论。
+            </p>
+        </div>
+
+        <!-- 底部链接 -->
+        <div class="footer-links">
+            <p>持续更新 · 关于资料整理与信息索引的实践记录</p>
+            <p><a href="https://zh-leis.com">雷速</a></p>
+        </div>
+
+    </div>
+
+</body>
+</html>

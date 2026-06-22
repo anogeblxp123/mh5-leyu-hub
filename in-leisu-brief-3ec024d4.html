@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>雷速 · 轻量导航介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f7fbfc;
+            color: #1d2b34;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部导航 */
+        .nav-header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 40, 50, 0.04);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            backdrop-filter: blur(2px);
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.3rem;
+            letter-spacing: 0.3px;
+            color: #096b72;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .nav-brand span {
+            background: #e0f2f1;
+            padding: 0.1rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #006064;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e4f;
+            padding: 0.25rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: #26a69a;
+            color: #00695c;
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 3rem;
+            flex: 1;
+        }
+
+        /* Hero / 核心介绍 */
+        .hero {
+            background: linear-gradient(145deg, #e0f5f1 0%, #b2dfdb 100%);
+            border-radius: 28px;
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 20px rgba(0, 77, 64, 0.06);
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 550;
+            letter-spacing: -0.3px;
+            color: #004d40;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 680px;
+            color: #1b4a46;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: white;
+            padding: 0.2rem 1rem 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            color: #00796b;
+            font-weight: 500;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+        }
+
+        /* 三个场景模块 — 网格卡片 */
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin: 2.5rem 0 2rem;
+        }
+
+        .scene-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.8rem 1.3rem 1.8rem 1.3rem;
+            box-shadow: 0 4px 12px rgba(0, 60, 60, 0.04);
+            border: 1px solid #d4ece8;
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+
+        .scene-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 80, 70, 0.08);
+            border-color: #80cbc4;
+        }
+
+        .scene-card .icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
+            display: inline-block;
+            background: #e0f2f1;
+            padding: 0.2rem 0.6rem;
+            border-radius: 60px;
+        }
+
+        .scene-card h3 {
+            font-size: 1.2rem;
+            font-weight: 550;
+            color: #004d40;
+            margin: 0.5rem 0 0.3rem;
+        }
+
+        .scene-card p {
+            font-size: 0.95rem;
+            color: #2b4a4a;
+            line-height: 1.6;
+        }
+
+        .scene-card .badge {
+            background: #e0f2f1;
+            color: #00695c;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-top: 0.8rem;
+        }
+
+        /* 常见说明 / FAQ 摘要 */
+        .faq-section {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem 2rem 1.8rem;
+            box-shadow: 0 2px 10px rgba(0, 30, 30, 0.02);
+            border: 1px solid #d5eae6;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .faq-section h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #004d40;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.2px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e2f0ed;
+            padding: 1rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item .question {
+            font-weight: 550;
+            color: #1b4a46;
+            margin-bottom: 0.15rem;
+            font-size: 1rem;
+        }
+
+        .faq-item .answer {
+            font-size: 0.95rem;
+            color: #2d5450;
+            margin-top: 0.2rem;
+        }
+
+        .faq-item .answer a {
+            color: #00796b;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            font-weight: 500;
+        }
+
+        .faq-item .answer a:hover {
+            color: #004d40;
+        }
+
+        /* 附加句子 / 链接嵌入 */
+        .inline-link-box {
+            background: #eef7f5;
+            border-radius: 48px;
+            padding: 0.9rem 1.8rem;
+            margin: 2rem 0 0.5rem;
+            display: inline-block;
+            font-size: 0.95rem;
+            border: 1px solid #c8e6e0;
+            color: #1b4a46;
+        }
+
+        .inline-link-box a {
+            color: #00695c;
+            font-weight: 550;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* 底部 */
+        .footer-note {
+            text-align: center;
+            color: #4d6e6a;
+            padding: 1.5rem 0 0.8rem;
+            font-size: 0.85rem;
+            border-top: 1px solid #d0e4e0;
+            margin-top: 1.5rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 800px) {
+            .scene-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.2rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .scene-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .nav-header {
+                padding: 0.6rem 1rem;
+            }
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .hero {
+                padding: 1.8rem 1.2rem;
+            }
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            .faq-section {
+                padding: 1.5rem 1.2rem;
+            }
+            .inline-link-box {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .nav-links {
+                gap: 0.6rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <header class="nav-header">
+        <div class="nav-brand">
+            <span>⚡</span> 雷速 <span>导航</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#intro">介绍</a>
+            <a href="#scenes">场景</a>
+            <a href="#faq">说明</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <!-- 核心介绍 hero -->
+        <section class="hero" id="intro">
+            <div class="tagline">轻量 · 直接 · 无冗余</div>
+            <h1>用最短路径理解 <a href="https://in-leisu-sports.com" style="color: #004d40; text-decoration: underline; text-underline-offset: 4px;">雷速</a> 是什么</h1>
+            <p>一个不绕弯子的体育信息服务站点，聚焦实时动态与赛事脉络。没有夸张的承诺，只有结构清晰的呈现。如果你需要快速定位某个联赛、比分或赛程变动，这里提供的信息组织方式也许刚好对味。</p>
+        </section>
+
+        <!-- 三个场景模块 -->
+        <section id="scenes" style="scroll-margin-top: 70px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.2rem; flex-wrap: wrap;">
+                <h2 style="font-weight: 500; color: #004d40; font-size: 1.3rem;">常见使用场景</h2>
+                <span style="font-size: 0.8rem; color: #3b6b65;">根据用户观察整理</span>
+            </div>
+            <div class="scene-grid">
+                <div class="scene-card">
+                    <div class="icon">🏃</div>
+                    <h3>赛前快速浏览</h3>
+                    <p>开赛前几分钟，你只想知道首发、天气、实时盘路。打开<a href="https://in-leisu-sports.com" style="color: #00796b; text-decoration: underline;">雷速</a>页面，信息层级分明，不需要反复跳转。</p>
+                    <div class="badge">即时</div>
+                </div>
+                <div class="scene-card">
+                    <div class="icon">📋</div>
+                    <h3>多赛事对照</h3>
+                    <p>同时关注篮球、足球、网球？页面默认用卡片分隔联赛，一目了然。适合边看边记的轻度用户。</p>
+                    <div class="badge">整合</div>
+                </div>
+                <div class="scene-card">
+                    <div class="icon">🔍</div>
+                    <h3>查赛果与走势</h3>
+                    <p>比赛结束后想回顾数据，或者看近期交锋记录。相关模块按时间倒序排列，不藏不掖。</p>
+                    <div class="badge">历史</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常见说明 / FAQ 摘要 -->
+        <section class="faq-section" id="faq">
+            <h2>❓ 常见说明</h2>
+            <div class="faq-item">
+                <div class="question">这个网站主要提供什么？</div>
+                <div class="answer">体育赛事数据、实时比分、赛程和部分统计。界面偏向实用，没有广告弹窗干扰。站点名 <a href="https://in-leisu-sports.com">雷速</a> 本身也暗示了对信息速度的侧重。</div>
+            </div>
+            <div class="faq-item">
+                <div class="question">需要注册或付费吗？</div>
+                <div class="answer">目前浏览公开内容不需要账户。部分深度数据或个性化功能可能涉及登录，具体以实际页面提示为准。</div>
+            </div>
+            <div class="faq-item">
+                <div class="question">覆盖哪些体育项目？</div>
+                <div class="answer">主流项目基本都包含：足球、篮球、网球、棒球、电竞等。不同联赛的展示深度略有差异，但核心信息字段完整。</div>
+            </div>
+            <div class="faq-item">
+                <div class="question">移动端体验如何？</div>
+                <div class="answer">页面采用响应式设计，手机浏览器直接打开即可。卡片和导航都针对小屏做了适配，单手操作比较顺手。</div>
+            </div>
+        </section>
+
+        <!-- 自然嵌入链接的句子，不额外使用“进入/点击”等词 -->
+        <div class="inline-link-box">
+            <span>📌 如果你好奇实际界面，可以直接前往 <a href="https://in-leisu-sports.com">雷速</a> 看一眼布局。整个站点的信息密度适中，一般几分钟就能摸清结构。</span>
+        </div>
+
+        <div style="margin-top: 1.8rem; font-size: 0.9rem; color: #3c6b64; background: #e7f3f0; padding: 1rem 1.4rem; border-radius: 24px;">
+            <span>⚙️ 补充说明：本页仅作介绍，不代替原始网站功能。数据准确性以<a href="https://in-leisu-sports.com" style="color: #00695c; text-decoration: underline;">雷速</a>实时页面为准。</span>
+        </div>
+
+    </main>
+
+    <footer class="footer-note">
+        <span>— 轻量导航介绍 · 无冗余 —</span>
+    </footer>
+
+</body>
+</html>
